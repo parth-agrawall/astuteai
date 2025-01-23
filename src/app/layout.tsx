@@ -15,13 +15,16 @@ export const metadata: Metadata = {
   description: "One stop solution for all your Startup needs",
 };
 
+// Replace 'your-publishable-key-here' with your actual publishable key or use an environment variable
+const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "pk_test_YnJhdmUtbWFsYW11dGUtMjMuY2xlcmsuYWNjb3VudHMuZGV2JA";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider publishableKey={clerkPublishableKey}>
       <html lang="en">
         <head>
           <meta charSet="utf-8" />
@@ -34,14 +37,13 @@ export default function RootLayout({
         </head>
         <body className={clsx(dmSans.className, "antialiased")}>
           <ConditionalLayout>
-            {" "}
             <ThemeProvider
               attribute="class"
               defaultTheme="dark"
               enableSystem
               disableTransitionOnChange
             >
-              {children}{" "}
+              {children}
             </ThemeProvider>
           </ConditionalLayout>
           <Toaster />
